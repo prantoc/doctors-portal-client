@@ -88,7 +88,7 @@ const Login = () => {
     return (
         <Container>
             <Row className='my-5'>
-                <Col md={4} sm={10} className='mx-auto border p-5 rounded text-white auth-card'>
+                <Col md={4} sm={10} className='mx-auto border p-5 rounded text-secondary auth-card'>
                     {/* <form onSubmit={userLogin}> */}
                     <form >
                         <h1 className='text-center pb-4'>Login</h1>
