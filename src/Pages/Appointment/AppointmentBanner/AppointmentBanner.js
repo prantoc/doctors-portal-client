@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import bannerImg from '../../../assets/imgs/images/chair.png'
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
-const AppointmentBanner = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+const AppointmentBanner = ({ selectedDate, setSelectedDate }) => {
     return (
         <>
             <Container className='py-5 home-top-banner'>
