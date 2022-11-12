@@ -12,6 +12,15 @@ const NavBar = () => {
                         <LinkContainer to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/appointment">
+                            <Nav.Link>Appointment</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/about">
+                            <Nav.Link>About</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/reviews">
+                            <Nav.Link>Reviews</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/login">
                             <Nav.Link>Login</Nav.Link>
                         </LinkContainer>
