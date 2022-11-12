@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import bannerImg from '../../../assets/imgs/images/chair.png'
-import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 const AppointmentBanner = ({ selectedDate, setSelectedDate }) => {
     return (
@@ -13,7 +12,6 @@ const AppointmentBanner = ({ selectedDate, setSelectedDate }) => {
                             selected={selectedDate}
                             onSelect={setSelectedDate}
                         />
-                        <p>You have selected date: <span className='primary-color fw-bold' >{format(selectedDate, 'PP')}</span></p>
                     </Col>
                     <Col lg={6} md={6} sm={12}>
                         <img className='img-fluid' src={bannerImg} alt="" />
