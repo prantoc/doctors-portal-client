@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import bannerImg from '../../../assets/imgs/images/chair.png'
-import PrimaryButton from '../../../components/PrimaryButton/PrimaryButton';
-
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
 const AppointmentBanner = () => {
+    const [selectedDate, setSelectedDate] = useState(new Date());
     return (
         <>
             <Container className='py-5 home-top-banner'>
                 <Row>
                     <Col lg={6} md={6} sm={12}>
-                        <h1 className='text-dark lh-base'>Your New Smile Starts<br /> Here</h1>
-                        <p className='text-dark p-2'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                        <PrimaryButton>Get Started</PrimaryButton>
+                        <DayPicker mode="single"
+                            selected={selectedDate}
+                            onSelect={setSelectedDate}
+                        />
+                        <p>You have selected date: <span className='primary-color fw-bold' >{format(selectedDate, 'PP')}</span></p>
                     </Col>
                     <Col lg={6} md={6} sm={12}>
                         <img className='img-fluid' src={bannerImg} alt="" />
