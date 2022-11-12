@@ -1,8 +1,45 @@
 /*! home-top-banner */
-
 .home-top-banner {
     background: url('../../imgs/images/bg.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.cs-btn-1 {
+    background: linear-gradient(90deg, #19D3AE -22.5%, #0FCFEC 120.83%);
+    border-radius: 8px;
+    border: none;
+    padding: 14px 25px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+
+.cs-btn-1:hover {
+    background: #0FCFEC 120.83%;
+}
+
+/*! business-hour-info */
+
+.clock-card {
+    background: linear-gradient(90deg, #19D3AE -38.67%, #0FCFEC 129.78%);
+    border-radius: 14px;
+    border: none !important;
+    color: #fff !important;
+    padding: 10px;
+    height: 100% !important;
+}
+
+.location-card {
+    background: #3A4256 !important;
+    border-radius: 14px;
+    border: none !important;
+    color: #fff !important;
+    padding: 10px;
+    height: 100% !important;
 }
