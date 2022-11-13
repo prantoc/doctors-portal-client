@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
-import PrimaryButton from '../../../components/PrimaryButton/PrimaryButton';
 
-const AppointmentOption = ({ appointmentOp }) => {
+const AppointmentOption = ({ appointmentOp, setShow, setTreatment }) => {
+    const handleShow = () => setShow(true);
     const { name, slots } = appointmentOp
     return (
         <>
@@ -14,7 +14,7 @@ const AppointmentOption = ({ appointmentOp }) => {
                         <Card.Text>
                             {slots.length} {slots.length > 1 ? 'SPACES' : 'SPACE'} AVAILABLE
                         </Card.Text>
-                        <PrimaryButton>Book Appointment</PrimaryButton>
+                        <button onClick={() => { setTreatment(appointmentOp); handleShow(); }} disabled={slots.length === 0} className={`${slots.length === 0 ? 'btn btn-secondary disabled py-2 px-5 mb-4' : 'cs-btn-1 mb-3'}`}>Book Appointment</button>
                     </Card.Body>
                 </Card>
             </Col>
