@@ -6,7 +6,7 @@ import BookingModal from '../BookingModal/BookingModal';
 const AvailableAppointments = ({ selectedDate }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const [treatment, setTreatment] = useState({})
+    const [treatment, setTreatment] = useState(null)
     // console.log(treatment);
     const [appointmentOption, setAppointmentOption] = useState([])
     useEffect(() => {
@@ -24,7 +24,7 @@ const AvailableAppointments = ({ selectedDate }) => {
                     {appointmentOption.map(appointmentOp => <AppointmentOption setTreatment={setTreatment} setShow={setShow} key={appointmentOp._id} appointmentOp={appointmentOp}></AppointmentOption>)}
                 </Row>
 
-                <BookingModal selectedDate={selectedDate} treatment={treatment} handleClose={handleClose} show={show}></BookingModal>
+                {treatment && <BookingModal setShow={setShow} selectedDate={selectedDate} treatment={treatment} handleClose={handleClose} show={show}></BookingModal>}
             </Container>
 
         </>
