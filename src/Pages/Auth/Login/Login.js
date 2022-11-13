@@ -1,15 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import google from '../../../assets/imgs/login/google.png'
 import facebook from '../../../assets/imgs/login/facebook.png'
 import github from '../../../assets/imgs/login/github.png'
 import { FaArrowRight } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../../contexts/AuthProvider';
+import { errorToast, successToast } from '../../../toast/Toaster';
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { userSignIn, loading, setLoading, } = useContext(AuthContext);
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    let location = useLocation();
+    const navigate = useNavigate();
+    let from = location.state?.from?.pathname || "/";
     const handleLogin = data => {
-        console.log(data);
+        setLoading(true)
+        const { email, password } = data
+
+        userSignIn(email, password)
+            .then(() => {
+                successToast(`You Logged in successfully`);
+                setLoading(false)
+                navigate(from, { replace: true });
+            })
+            .catch((e) => {
+                const errorMessage = e.message;
+                errorToast(errorMessage);
+                console.log(errorMessage);
+            })
     }
 
     return (
@@ -20,15 +39,33 @@ const Login = () => {
                         <h1 className='text-center pb-4'>Login</h1>
                         <div className="mb-4">
                             <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                            <input {...register("email", { required: true, })} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required />
+                            <input {...register("email", {
+                                required: { value: true, message: "Email Address is required" },
+                                // pattern: {
+                                //     value: /^\S+@\S+$/i,
+                                //     message: "I think I said _valid_, didn't I?"
+                                // }
+                            })} type="email" className="form-control" id="exampleInputEmail1" aria-invalid={errors.email ? "true" : "false"} />
+                            {errors.email && <p className='text-danger fw-bold my-1' role="alert">{errors.email?.message}</p>}
                         </div>
                         <div className="mb-4">
                             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                            <input {...register("password")} type="password" className="form-control" id="exampleInputPassword1" required />
+                            <input {...register("password", {
+                                required: { value: true, message: "Password Address is required" },
+                                minLength: { value: 6, message: 'Password must be 6 characters!' }
+                            })} type="password" className="form-control" id="exampleInputPassword1" aria-invalid={errors.password ? "true" : "false"} />
+                            {errors.password && <p className='text-danger fw-bold my-1' role="alert">{errors.password?.message}</p>}
                         </div>
                         <button type="submit" className="btn btn-primary text-center col-12  rounded">
                             <div>
-                                Login <FaArrowRight></FaArrowRight>
+
+                                {loading
+                                    ?
+                                    <div className="spinner-border text-dark" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                    :
+                                    <>Login <FaArrowRight></FaArrowRight></>}
                             </div>
                         </button>
                     </form>
