@@ -2,9 +2,28 @@ import { format } from 'date-fns';
 import React from 'react';
 import { Form, Modal } from 'react-bootstrap';
 
-const BookingModal = ({ show, handleClose, treatment, selectedDate }) => {
+const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate }) => {
     const { name, slots } = treatment; //apppointment options 
     const date = format(selectedDate, 'PP')
+    const handleBooking = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const date = form.date.value
+        const slot = form.slot.value
+        const paitentName = form.name.value
+        const phone = form.phone.value
+        const email = form.email.value
+        const booking = {
+            appointmentDate: date,
+            treatment: name,
+            slot,
+            paitentName,
+            phone,
+            email
+        }
+        setShow(false)
+        console.log(booking);
+    }
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -12,7 +31,7 @@ const BookingModal = ({ show, handleClose, treatment, selectedDate }) => {
                     <Modal.Title>{name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleBooking}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Control
                                 type="text"
@@ -25,8 +44,8 @@ const BookingModal = ({ show, handleClose, treatment, selectedDate }) => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Select aria-label="Default select example">
-                                {slots?.map(slot => <option key={slot} value={slot}>{slot}</option>)}
+                            <Form.Select aria-label="Default select example" name='slot'>
+                                {slots?.map((slot, i) => <option key={i} value={slot}>{slot}</option>)}
                             </Form.Select>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
