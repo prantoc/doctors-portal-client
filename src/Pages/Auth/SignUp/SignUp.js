@@ -17,9 +17,13 @@ const SignUp = () => {
         signInWithEmailPass(email, password)
             .then(() => {
                 updateUserData(name)
-                successToast('successfully created an account')
-                logoutUser();
-                setLoading(false)
+                    .then(() => {
+                        successToast('successfully created an account')
+                        logoutUser();
+                        setLoading(false)
+                    }).catch((error) => {
+                        errorToast(error)
+                    });
             })
             .catch((error) => {
                 const errorMessage = error.message;
