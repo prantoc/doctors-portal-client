@@ -34,7 +34,9 @@ const NavBar = () => {
 
                             {user?.uid ?
                                 <>
-                                    <Nav.Link className='fw-bold'>{user.displayName}</Nav.Link>
+                                    <LinkContainer to="/dashboard">
+                                        <Nav.Link>Dashboard</Nav.Link>
+                                    </LinkContainer>
                                     <Nav.Link onClick={handleLogOut} className="text-dark fw-bold" role='button'>Sign out</Nav.Link>
                                 </>
                                 :
