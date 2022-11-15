@@ -4,7 +4,7 @@ import { Form, Modal } from 'react-bootstrap';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { successToast } from '../../../toast/Toaster';
 
-const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate }) => {
+const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, refetch }) => {
     const { user } = useContext(AuthContext);
     const { name, slots } = treatment; //apppointment options 
     const date = format(selectedDate, 'PP')
@@ -37,6 +37,7 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate }) =
                 setShow(false)
                 if (data.acknowledged) {
                     successToast('Your booking is confirmed')
+                    refetch()
                 }
             })
     }
