@@ -1,8 +1,10 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Modal } from 'react-bootstrap';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate }) => {
+    const { user } = useContext(AuthContext);
     const { name, slots } = treatment; //apppointment options 
     const date = format(selectedDate, 'PP')
     const handleBooking = (e) => {
@@ -52,8 +54,20 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate }) =
                             <Form.Control
                                 type="text"
                                 placeholder="Full name"
+                                defaultValue={user?.displayName}
                                 autoFocus
                                 name='name'
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Control
+                                type="email"
+                                placeholder="Email"
+                                defaultValue={user?.email}
+                                disabled
+                                autoFocus
+                                name='email'
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -62,14 +76,6 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate }) =
                                 placeholder="Phone Number"
                                 autoFocus
                                 name='phone'
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Control
-                                type="email"
-                                placeholder="Email"
-                                autoFocus
-                                name='email'
                             />
                         </Form.Group>
                         <button className='btn btn-dark my-3 py-2 col-12'>Submit</button>
