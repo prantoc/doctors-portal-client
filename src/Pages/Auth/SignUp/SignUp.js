@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import google from '../../../assets/imgs/login/google.png'
 import facebook from '../../../assets/imgs/login/facebook.png'
 import github from '../../../assets/imgs/login/github.png'
@@ -9,8 +9,9 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
 const SignUp = () => {
-    const { signInWithEmailPass, loading, setLoading, updateUserData, logoutUser } = useContext(AuthContext)
+    const { signInWithEmailPass, loading, setLoading, updateUserData } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const handleSignUp = data => {
         setLoading(true)
         const { name, email, password } = data
@@ -19,8 +20,8 @@ const SignUp = () => {
                 updateUserData(name)
                     .then(() => {
                         successToast('successfully created an account')
-                        logoutUser();
                         setLoading(false)
+                        navigate('/')
                     }).catch((error) => {
                         errorToast(error)
                     });

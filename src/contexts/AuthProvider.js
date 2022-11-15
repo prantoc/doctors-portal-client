@@ -21,9 +21,7 @@ const AuthProvider = ({ children }) => {
     //update user data after signup
     const updateUserData = (name) => {
         setLoading(true)
-        updateProfile(auth.currentUser, {
-            displayName: name,
-        })
+        return updateProfile(auth.currentUser, { displayName: name, })
     }
 
     //signout user
