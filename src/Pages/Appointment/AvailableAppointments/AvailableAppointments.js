@@ -3,17 +3,17 @@ import { Container, Row } from 'react-bootstrap';
 import { format } from 'date-fns';
 import AppointmentOption from './AppointmentOption';
 import BookingModal from '../BookingModal/BookingModal';
+import { useQuery } from '@tanstack/react-query';
 const AvailableAppointments = ({ selectedDate }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [treatment, setTreatment] = useState(null)
-    // console.log(treatment);
-    const [appointmentOption, setAppointmentOption] = useState([])
-    useEffect(() => {
-        fetch(`appointmentData.json`)
-            .then(res => res.json())
-            .then(data => setAppointmentOption(data))
-    }, [])
+
+    const { data: appointmentOption = [] } = useQuery({
+        queryKey: ['appointment-options'],
+        queryFn: () => fetch(`http://localhost:5000/appointment-options`).then(res => res.json())
+    })
+
     return (
         <>
             <Container className='my-5'>
