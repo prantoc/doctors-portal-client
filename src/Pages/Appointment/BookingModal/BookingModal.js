@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { Form, Modal } from 'react-bootstrap';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import { successToast } from '../../../toast/Toaster';
+import { errorToast, successToast } from '../../../toast/Toaster';
 
 const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, refetch }) => {
     const { user } = useContext(AuthContext);
@@ -34,10 +34,13 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, ref
         })
             .then(res => res.json())
             .then(data => {
-                setShow(false)
                 if (data.acknowledged) {
+                    setShow(false)
                     successToast('Your booking is confirmed')
                     refetch()
+                }
+                else {
+                    errorToast(data.message)
                 }
             })
     }
