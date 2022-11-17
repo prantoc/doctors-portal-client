@@ -67,15 +67,6 @@ const SignUp = () => {
             })
     }
 
-
-    // const mutation = useMutation({
-    //     mutationFn: email => {
-    //         return axios.post('/todos', newTodo)
-    //     }
-    // })
-
-
-
     return (
         <Container>
             <Row className='my-5'>
