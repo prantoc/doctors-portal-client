@@ -13,14 +13,14 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, ref
         const form = e.target;
         const date = form.date.value
         const slot = form.slot.value
-        const paitentName = form.name.value
+        const patientName = form.name.value
         const phone = form.phone.value
         const email = form.email.value
         const booking = {
             appointmentDate: date,
             treatment: name,
             slot,
-            paitentName,
+            patientName,
             phone,
             email
         }
