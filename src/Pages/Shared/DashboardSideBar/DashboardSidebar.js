@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { AuthContext } from '../../../contexts/AuthProvider';
+import { useAdmin } from '../../../hooks/useAdmin';
 
 const DashboardSidebar = () => {
+    const { user } = useContext(AuthContext)
+    const [isAdmin] = useAdmin(user?.email)
     return (
         <div>
             <div className="d-flex flex-column flex-shrink-0 p-3 bg-light" style={{ width: "280px" }}>
@@ -11,9 +15,10 @@ const DashboardSidebar = () => {
                         <LinkContainer to="/dashboard">
                             <Nav.Link>My Appointments</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/dashboard/users">
+
+                        {isAdmin && <LinkContainer to="/dashboard/users">
                             <Nav.Link>Users</Nav.Link>
-                        </LinkContainer>
+                        </LinkContainer>}
                     </li>
                 </ul>
             </div>

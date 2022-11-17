@@ -1,13 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { successToast } from '../../../toast/Toaster';
+import { errorToast, successToast } from '../../../toast/Toaster';
 import Loading from '../../Shared/Loading/Loading';
 
 const Users = () => {
     const { isLoading, data: users = [], refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch(`http://localhost:5000/users`).then(res => res.json())
+        queryFn: () => fetch(`http://localhost:5000/users`, {
+            headers: {
+                authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+            }
+        }).then(res => res.json())
     })
 
     const handleMakeAdmin = id => {
@@ -22,6 +26,8 @@ const Users = () => {
                 if (data.acknowledged) {
                     successToast('Role set successfully as an admin')
                     refetch()
+                } else {
+                    errorToast('You cant do it!')
                 }
             })
     }
@@ -45,7 +51,7 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, i) =>
+                        {users.length > 0 && users?.map((user, i) =>
                             <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>{user.name}</td>
