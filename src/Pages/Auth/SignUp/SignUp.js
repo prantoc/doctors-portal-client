@@ -48,13 +48,34 @@ const SignUp = () => {
                 if (data.acknowledged) {
                     successToast('successfully created an account')
                     setLoading(false)
-                    navigate('/')
+                    getUserToken(user.email)
                 }
                 else {
                     errorToast('Something went wrong')
                 }
             })
     }
+
+    const getUserToken = email => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem('doctor-portal', data.accessToken)
+                    navigate('/')
+                }
+            })
+    }
+
+
+    // const mutation = useMutation({
+    //     mutationFn: email => {
+    //         return axios.post('/todos', newTodo)
+    //     }
+    // })
+
+
+
     return (
         <Container>
             <Row className='my-5'>
