@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import google from '../../../assets/imgs/login/google.png'
@@ -8,12 +8,19 @@ import { FaArrowRight } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
+import { useToken } from '../../../hooks/useToken';
 const Login = () => {
     const { userSignIn, loading, setLoading, } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    let location = useLocation();
+    const [loggedInUserEmail, setLoggedInUserEmail] = useState('')
+    const token = useToken(loggedInUserEmail)
+    const location = useLocation();
     const navigate = useNavigate();
-    let from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
     const handleLogin = data => {
         setLoading(true)
         const { email, password } = data
@@ -22,7 +29,7 @@ const Login = () => {
             .then(() => {
                 successToast(`You Logged in successfully`);
                 setLoading(false)
-                navigate(from, { replace: true });
+                setLoggedInUserEmail(email)
             })
             .catch((e) => {
                 const errorMessage = e.message;
