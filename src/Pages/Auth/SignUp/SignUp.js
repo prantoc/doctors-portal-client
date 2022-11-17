@@ -15,13 +15,15 @@ const SignUp = () => {
     const handleSignUp = data => {
         setLoading(true)
         const { name, email, password } = data
+        const user = {
+            name,
+            email
+        }
         signInWithEmailPass(email, password)
             .then(() => {
                 updateUserData(name)
                     .then(() => {
-                        successToast('successfully created an account')
-                        setLoading(false)
-                        navigate('/')
+                        saveUser(user)
                     }).catch((error) => {
                         errorToast(error)
                     });
@@ -31,6 +33,27 @@ const SignUp = () => {
                 errorToast(errorMessage)
                 setLoading(false)
             });
+    }
+
+    const saveUser = (user) => {
+        fetch(`http://localhost:5000/users`, {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    successToast('successfully created an account')
+                    setLoading(false)
+                    navigate('/')
+                }
+                else {
+                    errorToast('Something went wrong')
+                }
+            })
     }
     return (
         <Container>
