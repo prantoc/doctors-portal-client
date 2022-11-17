@@ -5,14 +5,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 const DashboardSidebar = () => {
     return (
         <div>
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style={{ width: "280px" }}>
-                <ul class="nav  flex-column mb-auto">
-                    <li class="nav-item">
+            <div className="d-flex flex-column flex-shrink-0 p-3 bg-light" style={{ width: "280px" }}>
+                <ul className="nav  flex-column mb-auto">
+                    <li className="nav-item">
                         <LinkContainer to="/dashboard">
-                            <Nav.Link>Home</Nav.Link>
+                            <Nav.Link>My Appointments</Nav.Link>
                         </LinkContainer>
                     </li>
-
                 </ul>
             </div>
 

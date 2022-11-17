@@ -13,7 +13,7 @@ const DashboardLayout = () => {
                     <Col md={2}>
                         <DashboardSidebar></DashboardSidebar>
                     </Col>
-                    <Col md={10} className="p-5 mx-auto" style={{ background: "#f1f5f9" }}>
+                    <Col md={10} className="p-5" style={{ background: "#f1f5f9" }}>
                         <Outlet></Outlet>
                     </Col>
                 </Row>
