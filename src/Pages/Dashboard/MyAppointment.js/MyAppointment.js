@@ -6,9 +6,13 @@ import Loading from '../../Shared/Loading/Loading';
 
 const MyAppointment = () => {
     const { user } = useContext(AuthContext)
-    const { data: bookingAppointments = [], isLoading } = useQuery({
+    const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['booking-appointments', user?.email],
-        queryFn: () => fetch(`http://localhost:5000/booking-appointments?email=${user?.email}`).then(res => res.json())
+        queryFn: () => fetch(`http://localhost:5000/booking-appointments?email=${user?.email}`, {
+            headers: {
+                authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+            }
+        }).then(res => res.json())
     })
 
     if (isLoading) {
@@ -29,7 +33,7 @@ const MyAppointment = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {bookingAppointments.map((booking, i) =>
+                        {bookings.map((booking, i) =>
                             <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>{booking.appointmentDate} <br /> ({booking.slot})</td>
