@@ -12,7 +12,10 @@ const Users = () => {
 
     const handleMakeAdmin = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
