@@ -5,6 +5,7 @@ import Appointment from "../../Pages/Appointment/Appointment/Appointment";
 import Login from "../../Pages/Auth/Login/Login";
 import SignUp from "../../Pages/Auth/SignUp/SignUp";
 import MyAppointment from "../../Pages/Dashboard/MyAppointment.js/MyAppointment";
+import Users from "../../Pages/Dashboard/Users/Users";
 import Home from "../../Pages/Home/Home/Home";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <MyAppointment></MyAppointment>
+            },
+            {
+                path: '/dashboard/users',
+                element: <Users></Users>
             }
         ]
     }

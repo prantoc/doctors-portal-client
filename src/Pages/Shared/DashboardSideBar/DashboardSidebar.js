@@ -11,6 +11,9 @@ const DashboardSidebar = () => {
                         <LinkContainer to="/dashboard">
                             <Nav.Link>My Appointments</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/dashboard/users">
+                            <Nav.Link>Users</Nav.Link>
+                        </LinkContainer>
                     </li>
                 </ul>
             </div>
