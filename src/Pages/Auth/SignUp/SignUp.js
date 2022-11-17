@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import google from '../../../assets/imgs/login/google.png'
@@ -8,10 +8,16 @@ import { FaArrowRight } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { errorToast, successToast } from '../../../toast/Toaster';
+import { useToken } from '../../../hooks/useToken';
 const SignUp = () => {
     const { signInWithEmailPass, loading, setLoading, updateUserData } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [createdEmail, setCreatedEmail] = useState('')
+    const token = useToken(createdEmail);
     const navigate = useNavigate();
+    if (token) {
+        navigate('/')
+    }
     const handleSignUp = data => {
         setLoading(true)
         const { name, email, password } = data
@@ -48,7 +54,7 @@ const SignUp = () => {
                 if (data.acknowledged) {
                     successToast('successfully created an account')
                     setLoading(false)
-                    getUserToken(user.email)
+                    setCreatedEmail(user.email)
                 }
                 else {
                     errorToast('Something went wrong')
@@ -56,16 +62,6 @@ const SignUp = () => {
             })
     }
 
-    const getUserToken = email => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.accessToken) {
-                    localStorage.setItem('doctor-portal', data.accessToken)
-                    navigate('/')
-                }
-            })
-    }
 
     return (
         <Container>
