@@ -21,6 +21,8 @@ const MyAppointment = () => {
                 <Table striped>
                     <thead>
                         <tr>
+
+                            <th>#</th>
                             <th>Appointment Date</th>
                             <th>Treatment</th>
                             <th>Patient Details</th>
@@ -29,6 +31,7 @@ const MyAppointment = () => {
                     <tbody>
                         {bookingAppointments.map((booking, i) =>
                             <tr key={i}>
+                                <td>{i + 1}</td>
                                 <td>{booking.appointmentDate} <br /> ({booking.slot})</td>
                                 <td>{booking.treatment}</td>
                                 <td>{booking.patientName} <br />{booking.email} <br />{booking.phone}</td>
