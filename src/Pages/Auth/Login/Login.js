@@ -34,6 +34,7 @@ const Login = () => {
             .catch((e) => {
                 const errorMessage = e.message;
                 errorToast(errorMessage);
+                setLoading(false)
                 console.log(errorMessage);
             })
     }
