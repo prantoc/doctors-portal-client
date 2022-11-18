@@ -17,7 +17,6 @@ const DashboardLayout = () => {
                         <Outlet></Outlet>
                     </Col>
                 </Row>
-
             </Container>
 
         </>
