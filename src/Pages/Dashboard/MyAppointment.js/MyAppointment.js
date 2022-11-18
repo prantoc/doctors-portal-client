@@ -33,7 +33,7 @@ const MyAppointment = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {bookings.map((booking, i) =>
+                        {bookings && bookings?.map((booking, i) =>
                             <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>{booking.appointmentDate} <br /> ({booking.slot})</td>
