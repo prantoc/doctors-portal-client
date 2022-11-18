@@ -19,6 +19,9 @@ const DashboardSidebar = () => {
                         {isAdmin && <LinkContainer to="/dashboard/users">
                             <Nav.Link>Users</Nav.Link>
                         </LinkContainer>}
+                        {isAdmin && <LinkContainer to="/dashboard/add-doctor">
+                            <Nav.Link>Add Doctor</Nav.Link>
+                        </LinkContainer>}
                     </li>
                 </ul>
             </div>
