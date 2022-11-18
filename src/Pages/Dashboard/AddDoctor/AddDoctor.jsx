@@ -1,13 +1,26 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaArrowRight } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
     const { loading, setLoading, } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const handleAddDoctor = () => {
+    const { data: specialities, isLoading } = useQuery({
+        queryKey: ['speciality'],
+        queryFn: () => fetch(`http://localhost:5000/appointmentSpeciality`).then(res => res.json())
 
+    })
+
+    const handleAddDoctor = data => {
+        const { name, email, speciality, img } = data
+    }
+
+
+    if (isLoading) {
+        return <Loading></Loading>
     }
     return (
         <>
@@ -33,10 +46,7 @@ const AddDoctor = () => {
                         <select {...register("speciality", {
                             required: { value: true, message: "Speciality is required" },
                         })} className="form-select" aria-label="Default select example" aria-invalid={errors.speciality ? "true" : "false"}>
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            {specialities && specialities.map(speciality => <option key={speciality._id} value={speciality.name}>{speciality.name}</option>)}
                         </select>
                         {errors.speciality && <p className='text-danger fw-bold my-1' role="alert">{errors.speciality?.message}</p>}
                     </div>
@@ -56,11 +66,11 @@ const AddDoctor = () => {
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
                                 :
-                                <>Login <FaArrowRight></FaArrowRight></>}
+                                <>Add a Doctor <FaArrowRight></FaArrowRight></>}
                         </div>
                     </button>
                 </form>
-            </div>
+            </div >
         </>
     );
 };
