@@ -19,7 +19,7 @@ const ManagedDoctors = () => {
     }
     return (
         <>
-            <h3>All Doctors</h3>
+            <h3>All Doctors: {doctors.length}</h3>
             <div className='shadow-lg p-3 my-3 bg-body rounded'>
                 <Table striped>
                     <thead>
