@@ -6,8 +6,10 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
-    const { loading, setLoading, } = useContext(AuthContext);
+    const { loading, setLoading } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const imgHostKey = process.env.REACT_APP_imgbb_key;
     const { data: specialities, isLoading } = useQuery({
         queryKey: ['speciality'],
         queryFn: () => fetch(`http://localhost:5000/appointmentSpeciality`).then(res => res.json())
@@ -15,7 +17,25 @@ const AddDoctor = () => {
     })
 
     const handleAddDoctor = data => {
-        const { name, email, speciality, img } = data
+        // const { name, email, speciality, img } = data
+        const img = data.img[0];
+        const formData = new FormData();
+        formData.append('image', img);
+        console.log(formData);
+        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+
+                if (imgData.success) {
+                    console.log(imgData)
+                    console.log(imgData.data.url)
+                }
+            })
+
     }
 
 
