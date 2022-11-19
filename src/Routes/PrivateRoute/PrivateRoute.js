@@ -2,17 +2,14 @@ import React, { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import Loading from '../../Pages/Shared/Loading/Loading';
 
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
     if (loading) {
-        return <div className='d-flex justify-content-center'>
-            <Spinner animation="border" role="status" className='text-white'>
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
-        </div>;
+        return <Loading></Loading>;
     }
     if (user) {
         return children;
