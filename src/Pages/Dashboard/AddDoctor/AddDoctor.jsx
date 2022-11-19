@@ -1,27 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaArrowRight } from 'react-icons/fa';
-import { AuthContext } from '../../../contexts/AuthProvider';
+import { successToast } from '../../../toast/Toaster';
 import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
-    const { loading, setLoading } = useContext(AuthContext);
+    const [load, setLoad] = useState(false);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const imgHostKey = process.env.REACT_APP_imgbb_key;
     const { data: specialities, isLoading } = useQuery({
         queryKey: ['speciality'],
-        queryFn: () => fetch(`http://localhost:5000/appointmentSpeciality`).then(res => res.json())
+        queryFn: () => fetch(`http://localhost:5000/appointmentSpeciality`, {
+            headers: {
+                authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+            }
+        }).then(res => res.json())
 
     })
 
     const handleAddDoctor = data => {
-        // const { name, email, speciality, img } = data
+        setLoad(true)
         const img = data.img[0];
         const formData = new FormData();
         formData.append('image', img);
-        console.log(formData);
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHostKey}`
         fetch(url, {
             method: 'POST',
@@ -29,10 +32,32 @@ const AddDoctor = () => {
         })
             .then(res => res.json())
             .then(imgData => {
-
                 if (imgData.success) {
-                    console.log(imgData)
-                    console.log(imgData.data.url)
+                    const { name, email, speciality } = data
+                    const avatar = imgData.data.url
+                    const doctor = {
+                        name,
+                        email,
+                        speciality,
+                        avatar
+                    }
+
+                    fetch(`http://localhost:5000/addDoctors`, {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                successToast('Doctor Successfully Added !')
+                                setLoad(false)
+                            }
+                        })
+
                 }
             })
 
@@ -80,7 +105,7 @@ const AddDoctor = () => {
 
                     <button type="submit" className="btn btn-primary text-center col-12  rounded">
                         <div>
-                            {loading
+                            {load
                                 ?
                                 <div className="spinner-border text-dark" role="status">
                                     <span className="visually-hidden">Loading...</span>
