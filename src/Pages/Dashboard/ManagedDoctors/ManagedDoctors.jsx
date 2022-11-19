@@ -1,7 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Image, Table } from 'react-bootstrap';
+import Loading from '../../Shared/Loading/Loading';
 
 const ManagedDoctors = () => {
+    const { data: doctors = [], isLoading } = useQuery({
+        queryKey: ['doctors'],
+        queryFn: () => fetch(`http://localhost:5000/doctors`, {
+            headers: {
+                authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+            }
+        })
+            .then(res => res.json())
+    })
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <>
             <h3>All Doctors</h3>
@@ -11,22 +26,26 @@ const ManagedDoctors = () => {
                         <tr>
 
                             <th>#</th>
+                            <th>Avatar</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Admin</th>
-                            <th>Delete</th>
+                            <th>Speciality</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {users.length > 0 && users?.map((user, i) =>
+                        {doctors.length > 0 && doctors?.map((doc, i) =>
                             <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>{user?.role !== 'admin' && <Button variant='primary' onClick={() => handleMakeAdmin(user._id)}>Make Admin</Button>}</td>
+                                <td>
+                                    <Image roundedCircle style={{ height: '48px' }} src={doc.avatar} />
+                                </td>
+                                <td>{doc.name}</td>
+                                <td>{doc.email}</td>
+                                <td>{doc.speciality}</td>
                                 <td><Button variant='danger'>Delete</Button></td>
                             </tr>
-                        )} */}
+                        )}
                     </tbody>
                 </Table>
             </div>
