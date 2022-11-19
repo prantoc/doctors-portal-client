@@ -2,13 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { successToast } from '../../../toast/Toaster';
 import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
     const [load, setLoad] = useState(false);
     const { register, formState: { errors }, handleSubmit } = useForm();
-
+    const navigate = useNavigate()
     const imgHostKey = process.env.REACT_APP_imgbb_key;
     const { data: specialities, isLoading } = useQuery({
         queryKey: ['speciality'],
@@ -55,6 +56,7 @@ const AddDoctor = () => {
                             if (data.acknowledged) {
                                 successToast('Doctor Successfully Added !')
                                 setLoad(false)
+                                navigate('/dashboard/managed-doctors')
                             }
                         })
 
