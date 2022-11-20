@@ -10,6 +10,7 @@ import MyAppointment from "../../Pages/Dashboard/MyAppointment.js/MyAppointment"
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import Users from "../../Pages/Dashboard/Users/Users";
 import Home from "../../Pages/Home/Home/Home";
+import Error from "../../Pages/Shared/Error/Error";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement: <Error />,
         children: [
             {
                 path: '/dashboard',
@@ -46,7 +48,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                element: <Payment></Payment>
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
             },
             {
                 path: '/dashboard/users',
