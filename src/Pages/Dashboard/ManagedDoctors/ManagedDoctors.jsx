@@ -1,13 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
-import SweetAlert2 from 'react-sweetalert2';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Loading from '../../Shared/Loading/Loading';
 
 const ManagedDoctors = () => {
-    const [swalProps, setSwalProps] = useState({});
     const { data: doctors = [], isLoading, refetch } = useQuery({
         queryKey: ['doctors'],
         queryFn: () => fetch(`http://localhost:5000/doctors`, {
