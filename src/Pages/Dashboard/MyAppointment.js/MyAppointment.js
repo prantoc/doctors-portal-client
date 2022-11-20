@@ -46,7 +46,7 @@ const MyAppointment = () => {
                                         booking.price && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}><Button className='btn btn-sm' variant='primary'>Pay</Button></Link>
                                     }
                                     {
-                                        booking.price && booking.paid && <span className='text-success'>Paid</span>
+                                        booking.price && booking.paid && <span className='text-success fw-bold'>Paid</span>
                                     }
                                 </td>
                             </tr>
