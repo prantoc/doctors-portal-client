@@ -1,9 +1,10 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React from 'react';
+import React, { useState } from 'react';
 
 const CheckoutForm = () => {
-    const stripe = useStripe;
-    const elements = useElements;
+    const [cardError, setCardError] = useState('')
+    const stripe = useStripe();
+    const elements = useElements();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -12,6 +13,29 @@ const CheckoutForm = () => {
             // form submission until Stripe.js has loaded.
             return;
         }
+        // Get a reference to a mounted CardElement. Elements knows how
+        // to find your CardElement because there can only ever be one of
+        // each type of element.
+        const card = elements.getElement(CardElement);
+
+        if (card === null) {
+            return;
+        }
+        // Use your card Element with other Stripe.js APIs
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card,
+        });
+
+        if (error) {
+            // console.log('[error]', error);
+            setCardError(error.message)
+        } else {
+            setCardError()
+            console.log('[PaymentMethod]', paymentMethod);
+        }
+
+
     }
 
     return (
@@ -32,7 +56,8 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button type="submit" disabled={!stripe}>
+            {cardError && <p className='text-danger fw-bold py-3'>{cardError}</p>}
+            <button className='btn btn-sm btn-primary mt-3 ' type="submit" disabled={!stripe}>
                 Pay
             </button>
         </form>
