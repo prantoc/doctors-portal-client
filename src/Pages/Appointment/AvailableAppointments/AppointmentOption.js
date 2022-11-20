@@ -3,7 +3,7 @@ import { Card, Col } from 'react-bootstrap';
 
 const AppointmentOption = ({ appointmentOp, setShow, setTreatment }) => {
     const handleShow = () => setShow(true);
-    const { name, slots } = appointmentOp
+    const { name, slots, price } = appointmentOp
     return (
         <>
             <Col md={4} sm={12} className="mb-3">
@@ -13,6 +13,8 @@ const AppointmentOption = ({ appointmentOp, setShow, setTreatment }) => {
                         <Card.Subtitle className="mb-3">{slots.length > 0 ? slots[0] : 'try another day'}</Card.Subtitle>
                         <Card.Text>
                             {slots.length} {slots.length > 1 ? 'SPACES' : 'SPACE'} AVAILABLE
+
+                            <p>Price : ${price}</p>
                         </Card.Text>
                         <button onClick={() => { setTreatment(appointmentOp); handleShow(); }} disabled={slots.length === 0} className={`${slots.length === 0 ? 'btn btn-secondary disabled py-2 px-5 mb-4' : 'cs-btn-1 mb-3'}`}>Book Appointment</button>
                     </Card.Body>
