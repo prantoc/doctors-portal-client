@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { successToast } from '../../../toast/Toaster';
 
 const CheckoutForm = ({ booking }) => {
-    const { patientName, email, price } = booking;
+    const { patientName, email, price, _id } = booking;
     const [cardError, setCardError] = useState('')
     const [clientSecret, setClientSecret] = useState("");
     const [paymentData, setPaymentData] = useState();
@@ -77,10 +77,32 @@ const CheckoutForm = ({ booking }) => {
             return;
         }
         if (paymentIntent.status === "succeeded") {
-            successToast('Your Payment has been completed successfully!')
-            setPaymentData(paymentIntent.id)
+
+            const payment = {
+                price,
+                transactionId: paymentIntent.id,
+                email,
+                bookingId: _id,
+            }
+
+            fetch(`http://localhost:5000/payments`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
+                },
+                body: JSON.stringify(payment),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        successToast('Your Payment has been completed successfully!')
+                        setPaymentData(paymentIntent.id)
+                        setLoading(false)
+                    }
+                })
         }
-        setLoading(false)
+
     }
 
     return (
