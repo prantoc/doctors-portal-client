@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Error = () => {
     const error = useRouteError()
-    const { user, logoutUser } = useContext(AuthContext);
+    const { logoutUser } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logoutUser()
