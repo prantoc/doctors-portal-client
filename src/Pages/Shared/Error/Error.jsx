@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Button } from 'react-bootstrap';
 import { useRouteError } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
@@ -15,7 +16,7 @@ const Error = () => {
         <div>
             <p className='text-danger fw-bold'>Something went wrong !</p>
             {error.statusText || error.message}
-            <p>Please <span onClick={handleLogOut} className="text-dark fw-bold" role='button'>sign out</span> and log back in</p>
+            <p>Please <Button onClick={handleLogOut}>Sign out</Button> and log back in</p>
         </div>
     );
 };
