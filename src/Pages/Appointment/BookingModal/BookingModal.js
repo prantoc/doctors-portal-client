@@ -6,7 +6,7 @@ import { errorToast, successToast } from '../../../toast/Toaster';
 
 const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, refetch }) => {
     const { user } = useContext(AuthContext);
-    const { name, slots } = treatment; //apppointment options 
+    const { name, slots, price } = treatment; //apppointment options 
     const date = format(selectedDate, 'PP')
     const handleBooking = (e) => {
         e.preventDefault();
@@ -22,7 +22,8 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, ref
             slot,
             patientName,
             phone,
-            email
+            email,
+            price
         }
 
         fetch(`http://localhost:5000/booking-appointment`, {

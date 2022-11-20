@@ -13,8 +13,9 @@ const AppointmentOption = ({ appointmentOp, setShow, setTreatment }) => {
                         <Card.Subtitle className="mb-3">{slots.length > 0 ? slots[0] : 'try another day'}</Card.Subtitle>
                         <Card.Text>
                             {slots.length} {slots.length > 1 ? 'SPACES' : 'SPACE'} AVAILABLE
+                            <br />
 
-                            <p>Price : ${price}</p>
+                            <span>Price : ${price}</span>
                         </Card.Text>
                         <button onClick={() => { setTreatment(appointmentOp); handleShow(); }} disabled={slots.length === 0} className={`${slots.length === 0 ? 'btn btn-secondary disabled py-2 px-5 mb-4' : 'cs-btn-1 mb-3'}`}>Book Appointment</button>
                     </Card.Body>
