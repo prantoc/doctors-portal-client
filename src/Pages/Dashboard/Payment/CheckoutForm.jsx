@@ -7,6 +7,7 @@ const CheckoutForm = ({ booking }) => {
     const [cardError, setCardError] = useState('')
     const [clientSecret, setClientSecret] = useState("");
     const [paymentData, setPaymentData] = useState();
+    const [loading, setLoading] = useState(false)
     const stripe = useStripe();
     const elements = useElements();
 
@@ -52,6 +53,11 @@ const CheckoutForm = ({ booking }) => {
             setCardError('')
             // console.log('[PaymentMethod]', paymentMethod);
         }
+
+
+
+        //# payment processing 
+        setLoading(true)
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -67,14 +73,14 @@ const CheckoutForm = ({ booking }) => {
 
         if (confirmError) {
             setCardError(confirmError.message)
+            // setLoading(false)
             return;
         }
         if (paymentIntent.status === "succeeded") {
             successToast('Your Payment has been completed successfully!')
             setPaymentData(paymentIntent.id)
         }
-        console.log('Payment Intent', paymentIntent);
-
+        setLoading(false)
     }
 
     return (
@@ -97,7 +103,7 @@ const CheckoutForm = ({ booking }) => {
                     }}
                 />
                 {cardError && <p className='text-danger fw-bold py-3'>{cardError}</p>}
-                <button className='btn btn-sm btn-primary mt-3 ' type="submit" disabled={!stripe || !clientSecret}>
+                <button className='btn btn-sm btn-primary mt-3 ' type="submit" disabled={!stripe || !clientSecret || loading}>
                     Pay
                 </button>
             </form>

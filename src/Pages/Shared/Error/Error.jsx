@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
-import { useRouteError } from 'react-router-dom';
+import { useNavigate, useRouteError } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Error = () => {
     const error = useRouteError()
     const { logoutUser } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleLogOut = () => {
         logoutUser()
-            .then(() => { })
+            .then(() => { navigate('/login') })
             .catch(err => console.log(err));
     }
     return (
