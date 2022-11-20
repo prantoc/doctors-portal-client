@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 
@@ -30,6 +31,7 @@ const MyAppointment = () => {
                             <th>Appointment Date</th>
                             <th>Treatment</th>
                             <th>Patient Details</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +41,14 @@ const MyAppointment = () => {
                                 <td>{booking.appointmentDate} <br /> ({booking.slot})</td>
                                 <td>{booking.treatment}</td>
                                 <td>{booking.patientName} <br />{booking.email} <br />{booking.phone}</td>
+                                <td>
+                                    {
+                                        booking.price && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}><Button className='btn btn-sm' variant='primary'>Pay</Button></Link>
+                                    }
+                                    {
+                                        booking.price && booking.paid && <span className='text-success'>Paid</span>
+                                    }
+                                </td>
                             </tr>
                         )}
                     </tbody>
