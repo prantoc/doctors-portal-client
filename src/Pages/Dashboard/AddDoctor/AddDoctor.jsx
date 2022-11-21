@@ -13,7 +13,7 @@ const AddDoctor = () => {
     const imgHostKey = process.env.REACT_APP_imgbb_key;
     const { data: specialities, isLoading } = useQuery({
         queryKey: ['speciality'],
-        queryFn: () => fetch(`http://localhost:5000/appointmentSpeciality`, {
+        queryFn: () => fetch(`https://doctors-portal-server-theta.vercel.app/appointmentSpeciality`, {
             headers: {
                 authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
             }
@@ -43,7 +43,7 @@ const AddDoctor = () => {
                         avatar
                     }
 
-                    fetch(`http://localhost:5000/addDoctors`, {
+                    fetch(`https://doctors-portal-server-theta.vercel.app/addDoctors`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

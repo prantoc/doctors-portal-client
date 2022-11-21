@@ -12,7 +12,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     const date = format(selectedDate, 'PP');
     const { data: appointmentOption = [], refetch, isLoading } = useQuery({
         queryKey: ['appointment-options', date],
-        queryFn: () => fetch(`http://localhost:5000/v2/appointment-options?date=${date}`).then(res => res.json())
+        queryFn: () => fetch(`https://doctors-portal-server-theta.vercel.app/v2/appointment-options?date=${date}`).then(res => res.json())
     })
 
     if (isLoading) {

@@ -9,7 +9,7 @@ const MyAppointment = () => {
     const { user } = useContext(AuthContext)
     const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['booking-appointments', user?.email],
-        queryFn: () => fetch(`http://localhost:5000/booking-appointments?email=${user?.email}`, {
+        queryFn: () => fetch(`https://doctors-portal-server-theta.vercel.app/booking-appointments?email=${user?.email}`, {
             headers: {
                 authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
             }

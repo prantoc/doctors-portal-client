@@ -8,7 +8,7 @@ import Loading from '../../Shared/Loading/Loading';
 const ManagedDoctors = () => {
     const { data: doctors = [], isLoading, refetch } = useQuery({
         queryKey: ['doctors'],
-        queryFn: () => fetch(`http://localhost:5000/doctors`, {
+        queryFn: () => fetch(`https://doctors-portal-server-theta.vercel.app/doctors`, {
             headers: {
                 authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
             }
@@ -30,7 +30,7 @@ const ManagedDoctors = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/doctor/${id}`, {
+                fetch(`https://doctors-portal-server-theta.vercel.app/doctor/${id}`, {
                     method: 'DELETE',
                     headers: {
                         authoraization: `bearer ${localStorage.getItem('doctor-portal')}`

@@ -7,7 +7,7 @@ import Loading from '../../Shared/Loading/Loading';
 const Users = () => {
     const { isLoading, data: users = [], refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch(`http://localhost:5000/users`, {
+        queryFn: () => fetch(`https://doctors-portal-server-theta.vercel.app/users`, {
             headers: {
                 authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
             }
@@ -15,7 +15,7 @@ const Users = () => {
     })
 
     const handleMakeAdmin = id => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://doctors-portal-server-theta.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authoraization: `bearer ${localStorage.getItem('doctor-portal')}`
