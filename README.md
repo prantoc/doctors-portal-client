@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Mobile Planet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A resell phone marketplace.Here you can buy and sell your old and new phone easily
 
-## Available Scripts
 
-In the project directory, you can run:
+## Demo Link
 
-### `npm start`
+https://mobile-planet-e8ad8.web.app/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Demo Admin Credentials
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Email: mobile-planet@gmail.com
+pass: 123456
 
-### `npm test`
+## Features
+- 3 types of user role (Buyer, seller, admin)
+- Jwt Authorization
+- Easy to Find products
+- Buyer can see the product details and can add to the wishlit also can add for booked and able to buy via stripe payment gateway
+- Seller can add their product and make the product advertised for get more view for sell the product
+- Seller also can delete the product and can able to see their buyers with details
+- Admin can able to see users and delete and verified the users. Also can see the products and able to delete the product
+- build secure Api's 
+- secure payment gateway 
+- User can review in services and able to see their reviews into my-reviews page
+- Easy to navigate
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Library & Packages 
+- react router
+- react bootstrap
+- react bootstrap router
+- react hot toast
+- react icons
+- animate css
+- react hook form
+-react query
+- Axios
+- React sweetalert2
+- Moment js
+- install react-photo-view
+- stripe
+## API Reference
+```
+ https://b612-used-products-resale-server-side-prantoc.vercel.app/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
