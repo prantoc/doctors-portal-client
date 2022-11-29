@@ -5,7 +5,7 @@ doctors portal help you to book your appointment through online without any trou
 
 ## Demo Link
 
-https://mobile-planet-e8ad8.web.app/
+https://doctors-portal-f9661.web.app/
 
 ## Demo Admin Credentials
 
