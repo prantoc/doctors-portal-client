@@ -1,6 +1,6 @@
-# Mobile Planet
+# Doctors Portal
 
-A resell phone marketplace.Here you can buy and sell your old and new phone easily
+doctors portal help you to book your appointment through online without any trouble at anywhere anytime
 
 
 ## Demo Link
