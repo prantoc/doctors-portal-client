@@ -13,7 +13,7 @@ Email: mobile-planet@gmail.com
 pass: 123456
 
 ## Features
-- 3 types of user role (Buyer, seller, admin)
+- 2 types of user role (User, admin)
 - Jwt Authorization
 - Easy to Find products
 - Buyer can see the product details and can add to the wishlit also can add for booked and able to buy via stripe payment gateway
