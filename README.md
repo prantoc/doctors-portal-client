@@ -42,6 +42,6 @@ pass: 123456
 - stripe
 ## API Reference
 ```
- https://b612-used-products-resale-server-side-prantoc.vercel.app/
+https://doctors-portal-server-theta.vercel.app/
 
 ```
