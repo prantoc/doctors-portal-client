@@ -117,7 +117,7 @@ const AddDoctor = () => {
                         </div>
                     </button>
                 </form>
-            </div >
+            </div>
         </>
     );
 };
