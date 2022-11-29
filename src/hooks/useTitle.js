@@ -2,7 +2,7 @@ const { useEffect } = require("react")
 
 function useTitle(title) {
     useEffect(() => {
-        document.title = `${title} - Mobile Planet`
+        document.title = `${title} - Doctors Portal`
     }, [title])
 }
 
