@@ -26,7 +26,7 @@ const BookingModal = ({ show, setShow, handleClose, treatment, selectedDate, ref
             price
         }
 
-        fetch(`https://doctors-portal-server-theta.vercel.app/booking-appointment`, {
+        fetch(`http://localhost:5000/booking-appointment`, {
             method: 'POST',
             headers: {
                 "content-type": "application/json",
